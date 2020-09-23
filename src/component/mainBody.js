@@ -23,16 +23,11 @@ class MainBody extends Component
       }
     }
 
-    componentDidMount()
-    {
-      
-    }
     componentDidUpdate(prevProps)
     {
       if(prevProps.match.params.subPage !== this.props.match.params.subPage)
       {
         let subPage = this.props.match.params.subPage;
-        console.log(this.props);
         this.setState(
           {
             subPage: subPage

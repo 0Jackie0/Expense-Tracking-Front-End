@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import "./login.css"
 import websideIcon from "../static/logo192.png"
-import expenseTrackerImage from "../static/Expense Tracker Image.png"
+// import expenseTrackerImage from "../static/Expense Tracker Image.png"
+import expenseTrackerImage from "../static/1.jpg"
 import s1 from "../static/s1.png";
 import s2 from "../static/w2.png";
 import userIcon from "../static/userIcon.png"

@@ -5,6 +5,13 @@ After setup the environment try to run `npm start` (I have include the node modu
 
 login account and password can be any value. (Cannot be empty)
 
+#After login
+
+Input expense information on the bottom left of the page
+
+click record in the list which position at the right of the screen, will enable edit function
+
+The page is Responsive to mobile screen
 
 ---------------------------------------------------------------------------------------------------------------
 

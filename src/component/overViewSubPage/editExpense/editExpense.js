@@ -6,14 +6,30 @@ import { GlobalContext } from "../../../dataManager/globalState";
 
 class EditExpense extends Component
 {
-    constructor(props)
+    constructor()
     {
         super();
 
-        // console.log(GlobalContext)
-        let target = GlobalContext._currentValue.expenseList.find(expense => expense.id === props.targetID);
+        this.state =
+        {
+            target: {
+                id: -1,
+                name: "",
+                amount: 0,
+                category: ""
+            },
+            isExpense: true,
+            errorMessageName: "",
+            errorMessageCatigoty: "",
+            goodItem: false
+        }
+    }
 
-        if(target == null)
+    componentDidMount()
+    {
+        let target = {...this.context.expenseList.find(expense => expense.id === this.props.targetID)};
+
+        if(target.id == null)
         {
             target =
             {
@@ -24,14 +40,16 @@ class EditExpense extends Component
             }
         }
 
-        this.state =
-        {
+        let isisExpense = target.amount <= 0 ? true : false;
+        target.amount = Math.abs(target.amount);
+
+        this.setState({
             target: target,
-            isExpense: target.amount <= 0 ? true : false,
             errorMessageName: "",
             errorMessageCatigoty: "",
-            goodItem: false
-        }
+            isExpense: isisExpense,
+            goodItem: target.name !== ""
+        })
     }
 
     componentDidUpdate(prevProps)
@@ -40,7 +58,7 @@ class EditExpense extends Component
         {
             let target = {...this.context.expenseList.find(expense => expense.id === this.props.targetID)};
 
-            if(target == null)
+            if(target.id == null)
             {
                 target =
                 {
@@ -114,6 +132,8 @@ class EditExpense extends Component
         {
             tempTarget.amount = Math.abs(parseFloat(event.target.value));
         }
+
+        console.log(tempTarget.amount);
         
 
         this.setState (
@@ -162,7 +182,7 @@ class EditExpense extends Component
 
         if(this.state.isExpense)
         {
-            packageTarget.amount = packageTarget.amount * -1
+            packageTarget.amount = Math.abs(packageTarget.amount) * -1
         }
 
         //Add

@@ -128,8 +128,6 @@ class MainBody extends Component
               :
               null
             }
-
-
             
           </GlobalProvider>
           

@@ -1,0 +1,16 @@
+.headerHeight
+{
+    height: 9vh;
+}
+
+.bodyArea
+{
+    width: 100%;
+}
+
+.overlayEdit
+{
+    position: absolute;
+    z-index: 2;
+    top: 60vh;
+}

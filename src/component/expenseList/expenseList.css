@@ -1,0 +1,23 @@
+.tableBodyScroll   
+{ 
+    overflow-y: auto; 
+    height: 80vh;
+}
+.tableBodyScroll thead th 
+{ 
+    position: sticky; 
+    top: 0;
+    background-color: #ffffff;
+}
+
+.tableBodyScrollSmall
+{
+    overflow-y: auto; 
+    height: 71vh;
+}
+.tableBodyScrollSmall thead th 
+{ 
+    position: sticky; 
+    top: 0;
+    background-color: #ffffff;
+}

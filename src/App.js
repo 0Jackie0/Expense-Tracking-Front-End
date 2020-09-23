@@ -12,7 +12,7 @@ function App()
       <div className="d-flex justify-content-center appbackground">
         <Switch>
             <Route exact path="/"> <Login/> </Route>
-            <Route path="/main"> <MainBody/> </Route>
+            <Route path="/main/:subPage"> <MainBody/> </Route>
         </Switch>
       </div>
       </BrowserRouter>

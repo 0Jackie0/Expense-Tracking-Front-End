@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import "./mainBody.css";
-import ExpenseList from './expenseList/expenseList';
+import ExpenseList from './overViewSubPage/expenseList/expenseList';
 import Header from './header/header';
-import OverView from "./overView/overView";
-import EditExpense from "./editExpense/editExpense"
+import OverView from "./overViewSubPage/overView/overView";
+import EditExpense from "./overViewSubPage/editExpense/editExpense";
+import ReportContent from "./reportSubPage/reportContent";
 
-import { GlobalPervider } from "../dataManager/globalState";
+import { withRouter } from "react-router";
+
+import { GlobalProvider } from "../dataManager/globalState";
 
 class MainBody extends Component
 {
@@ -15,7 +18,26 @@ class MainBody extends Component
       
       this.state =
       {
+        subPage: "OverView",
         editTargetId: -1,
+      }
+    }
+
+    componentDidMount()
+    {
+      
+    }
+    componentDidUpdate(prevProps)
+    {
+      if(prevProps.match.params.subPage !== this.props.match.params.subPage)
+      {
+        let subPage = this.props.match.params.subPage;
+        console.log(this.props);
+        this.setState(
+          {
+            subPage: subPage
+          }
+        );
       }
     }
 
@@ -45,6 +67,46 @@ class MainBody extends Component
       )
     }
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    overViewPageContent = () =>
+    {
+      return (
+        <div>
+          {this.state.editTargetId !== -1 ?
+            <div className="col-12 d-block d-sm-none overlayEdit">
+              <EditExpense targetID={this.state.editTargetId} closeOverlay={this.closeOverlay}/>
+            </div>
+            :
+            null
+          }
+
+          <div className="d-blok d-sm-flex">
+            <div className="col-12 col-sm-6">
+              <div className="col-12 ">
+                <OverView openOverlay={this.openOverlay}/>
+              </div>
+              <div className="col-12 d-none d-sm-block">
+                <EditExpense targetID={this.state.editTargetId} closeOverlay={this.closeOverlay}/>
+              </div>
+            </div>
+
+            <div className="col-12 col-sm-6">
+              <h4>Expense History</h4>
+              <hr/>
+              <ExpenseList editFunction={this.editFunction}/>
+            </div>
+          </div>
+        </div> 
+      )
+    }
+
+    reportPageContent = () =>
+    {
+      return(
+        <ReportContent/>
+      )
+    }
+
     render()
     {
       return (
@@ -53,38 +115,30 @@ class MainBody extends Component
             <Header/>
           </div>
 
-          <GlobalPervider>
-            {this.state.editTargetId !== -1 ?
-              <div className="col-12 d-block d-sm-none overlayEdit">
-                <EditExpense targetID={this.state.editTargetId} closeOverlay={this.closeOverlay}/>
-              </div>
+          <GlobalProvider>
+
+            {this.state.subPage === "OverView" ? 
+              this.overViewPageContent()
               :
               null
             }
 
-            <div className="d-blok d-sm-flex">
-              <div className="col-12 col-sm-6">
-                <div className="col-12 ">
-                  <OverView openOverlay={this.openOverlay}/>
-                </div>
-                <div className="col-12 d-none d-sm-block">
-                  <EditExpense targetID={this.state.editTargetId} closeOverlay={this.closeOverlay}/>
-                </div>
-              </div>
+            {this.state.subPage === "Report" ?
+              this.reportPageContent()
+              :
+              null
+            }
 
-              <div className="col-12 col-sm-6">
-                <h4>Expense History</h4>
-                <hr/>
-                <ExpenseList editFunction={this.editFunction}/>
-              </div>
-            </div>
-          </GlobalPervider>
+
+            
+          </GlobalProvider>
           
         </div>
       )
     }
 }
-export default MainBody;
+
+export default withRouter(MainBody);
 
 
 

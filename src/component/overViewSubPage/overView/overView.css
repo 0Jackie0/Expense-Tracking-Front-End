@@ -1,0 +1,14 @@
+.verticalDivider 
+{
+    border-right: 1px dashed #333;
+}
+
+.moneyTextSize
+{
+    font-size: x-large;
+}
+
+.incomeExpenseAreaSize
+{
+    max-height: 24vh;
+}
